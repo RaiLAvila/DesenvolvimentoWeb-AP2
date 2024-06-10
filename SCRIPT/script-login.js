@@ -12,7 +12,4 @@ document.getElementById('login-form').addEventListener('submit', function(event)
 });
 
 function sha256(message) {
-    // Esta função deve usar uma biblioteca real para calcular o hash SHA-256
-    // Exemplo de uso com CryptoJS:
-    // return CryptoJS.SHA256(message).toString(CryptoJS.enc.Hex);
 }

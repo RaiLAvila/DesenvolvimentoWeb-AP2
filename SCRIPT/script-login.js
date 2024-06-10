@@ -1,3 +1,6 @@
+import { hex_sha256 } from "./sha256-min.mjs";
+
+console.log(hex_sha256("456"))
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const password = document.getElementById('password').value;

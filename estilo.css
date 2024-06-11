@@ -10,6 +10,9 @@
     opacity: 0;
   }
 }
+html{
+  font-family: "Sixtyfour";
+}
 
 body {
     background-color: rgb(135, 10, 40);
@@ -20,7 +23,7 @@ p,a {
 }
 
 h1,h2,h3,h4{
-  font-family: "Arial";
+  font-family: "Sixtyfour";
   font-weight: "bold";
   font-size: 30px;
   color: white

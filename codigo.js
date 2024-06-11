@@ -15,20 +15,23 @@ if (localStorage.getItem('authorized')){
     row; justify-content: center; gap: 1em; margin: 2em 0px;"><button id"masculino"
     style="background-color: rgb(0, 97, 60); border: none;
     color: white; text-align: center; text-decoration: none; padding: 
-    0.4em 1em; cursor: pointer; font-size: 1.5em; max-width: 6em;">
-    Masculino</button><button id="feminino" style="background-color:
-    rgb(0, 97, 60); border: none; color: white; text-align: center;
-    text-decoration: none; padding: 0.5em 1em; cursor: pointer; 
-    font-size: 1.3em; max-width: 6em;">Feminino</button><button 
-    id="todos" style="background-color: rgb(0, 97, 60); border: none; color:
-    white; text-align: center; text-decoration: none; padding: 0.5em 
-    1em; cursor: pointer; font-size: 1.3em; max-width: 6em;">Elenco
-    Completo</button></div>
+    0.4em 1em; cursor: pointer; font-size: 1.5em;width: 9.5rem;">
+    Masculino</button><button id"feminino"
+    style="background-color: rgb(0, 97, 60); border: none;
+    color: white; text-align: center; text-decoration: none; padding: 
+    0.4em 1em; cursor: pointer; font-size: 1.5em;width: 9.5rem;">
+    Feminino</button><button id"todos"
+    style="background-color: rgb(0, 97, 60); border: none;
+    color: white; text-align: center; text-decoration: none; padding: 
+    0.4em 1em; cursor: pointer; font-size: 1.5em;width: 9.5rem;">
+    Todos</button></div>
+
+    <div style="text-align: center; margin: 0px auto 2em;">
+    <input type="search" placeholder="Busque o Jogador" 
+    style="text-align: center; line-height: 3em; max-width:
+    80%; width: 30em;">
+    </div>
     ` 
-    document.getElementById('masculino').onclick = () =>{
-        localStorage.removeItem('authorized');
-        window.location.href= 'detalhes.html';
-     } 
     document.getElementById('logout').onclick = () =>{
         localStorage.removeItem('authorized');
         window.location.href= 'index.html';
@@ -60,4 +63,5 @@ else{
     } else {
         alert('Senha incorreta');
     }
-};
+}
+

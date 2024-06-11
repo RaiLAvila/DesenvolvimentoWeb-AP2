@@ -1,29 +1,48 @@
-window.addEventListener('DOMContentLoaded', () => {
-    // Obter o ID do atleta da URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const atletaId = urlParams.get('id');
+async function fetchData(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Erro ao buscar dados da API');
+    }
+    return await response.json();
+}
 
-    // Fazer a chamada para obter os detalhes do atleta
-    fetch(`https://botafogo-atletas.mange.li/2024-1/${atletaId}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao obter detalhes do atleta');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const detalhesContainer = document.getElementById('atleta-detalhes');
-            // Exibir os detalhes do atleta no container
-            detalhesContainer.innerHTML = `
-                <h2>${data.nome}</h2>
-                <p>Idade: ${data.idade}</p>
-                <p>Posição: ${data.posicao}</p>
-                <p>Clube: ${data.clube}</p>
-            `;
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-            const detalhesContainer = document.getElementById('atleta-detalhes');
-            detalhesContainer.innerHTML = '<p>Erro ao carregar detalhes do atleta</p>';
-        });
-});
+async function createCard(data) {
+    const nome = data.name;
+    const posicao = data.position;
+    const imagemUrl = data.image_url;
+
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    const nomeElement = document.createElement('p');
+    nomeElement.textContent = `Nome: ${nome}`;
+
+    const posicaoElement = document.createElement('p');
+    posicaoElement.textContent = `Posição: ${posicao}`;
+
+    const imagemElement = document.createElement('img');
+    imagemElement.src = imagemUrl;
+    imagemElement.alt = 'Imagem do jogador';
+
+    card.appendChild(nomeElement);
+    card.appendChild(posicaoElement);
+    card.appendChild(imagemElement);
+
+    return card;
+}
+
+async function main() {
+    const url = "https://botafogo-atletas.mange.li/2024-1/all"
+
+    const container = document.getElementsByClassName('imagelayout'); // ID do container onde os cards serão adicionados
+
+    try {
+        const data = await fetchData(url);
+        const card = await createCard(data);
+        container.appendChild(card);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+main();

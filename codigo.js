@@ -103,6 +103,7 @@ if (localStorage.getItem('authorized')){
          "a1 a3"
          "a4 a4"
          "a5 a5"
+         "a6 a6"
          `;
          card.style.height = '25rem';
          card.style.border = 'solid';
@@ -120,22 +121,27 @@ if (localStorage.getItem('authorized')){
          imagem.style.width = '200px';
          imagem.style.height = '100%';
          imagem.style.objectFit = 'cover';
-         
+        
          const posicao = document.createElement('p');
          posicao.innerHTML = entrada.posicao;
          posicao.style.cssText = `
          grid-area: a2;
          display: flex;
          text-transform: uppercase;
+         margin: 10px;
          `;    
          posicao.style.gridArea = 'a2';
          posicao.style.display = 'flex';
+         posicao.style.fontWeight = 'bold';
          
          posicao.style.textTransform=  'uppercase';
          
          const nome = document.createElement('p');
          nome.innerHTML = entrada.nome;
          nome.className = 'nome';
+         nome.style.top = '0';
+         nome.style.left = '0';
+         nome.style.margin = '10px';
          nome.style.gridArea = 'a3';
          nome.style.display = 'flex';
          nome.style.gap = "5px"
@@ -145,16 +151,85 @@ if (localStorage.getItem('authorized')){
          /*descricao.innerHTML = entrada.detalhes;*/
          descricao.style.gridArea = 'a4';
          
-         const nascimento = document.createElement('p');
-         nascimento.innerHTML = entrada.nascimento;
-         nascimento.style.gridArea = 'a5';
-         
-         card.appendChild(imgContainer);
-         imgContainer.appendChild(imagem);
-         card.appendChild(posicao);
-         card.appendChild(nome);
-         card.appendChild(descricao);
-         card.appendChild(nascimento);
+        const detalhesContainer = document.createElement('div');
+        detalhesContainer.style.position = 'fixed';
+        detalhesContainer.style.top = '0';
+        detalhesContainer.style.left = '0';
+        detalhesContainer.style.width = '100%';
+        detalhesContainer.style.height = '100%';
+        detalhesContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+        detalhesContainer.style.display = 'none';
+        detalhesContainer.style.justifyContent = 'center';
+        detalhesContainer.style.alignItems = 'center';
+        detalhesContainer.style.zIndex = '9999'; 
+
+        const imagemAmpliada = document.createElement('img');
+        imagemAmpliada.style.width = '400px'; 
+        imagemAmpliada.style.height = 'auto'; 
+        imagemAmpliada.style.objectFit = 'contain'; 
+
+        const detalhesAmpliados = document.createElement('div');
+        detalhesAmpliados.style.color = '#fffff'; 
+        detalhesAmpliados.style.marginTop = '10px'; 
+        detalhesAmpliados.style.textAlign = 'center'; 
+
+        const nascimento = document.createElement('p');
+        nascimento.innerHTML = entrada.nascimento;
+        nascimento.style.gridArea = 'a5';
+        nascimento.style.top = '0';
+        nascimento.style.left = '0';
+        nascimento.style.margin = '10px';
+        nascimento.style.display = 'flex';
+        nascimento.style.gap = "5px"
+        nascimento.style.fontWeight = 'bold';
+
+        const detalhesButton = document.createElement('button');
+        detalhesButton.innerHTML = 'Detalhes';
+        detalhesButton.style.gridArea = 'a6';
+        detalhesButton.style.backgroundColor = "rgb(fffffff)";
+        detalhesButton.style.fontWeight = 'bold';
+        detalhesButton.style.textAlign = "center";
+        detalhesButton.style.cursor =  "pointer";
+        detalhesButton.style.border = 'none';
+        detalhesButton.style.padding = '1px 2px';
+        detalhesButton.style.width = "8.5rem";
+        detalhesButton.style.borderRadius = '5px';
+        detalhesButton.style.fontSize = "1.5em";
+        detalhesButton.style.border = "none";
+        detalhesButton.style.transition = "transform 0.3s";
+
+        detalhesButton.classList.add('detalhes-button');
+        detalhesButton.addEventListener('click', (event) => {
+        if (event.target === detalhesContainer) {
+        detalhesContainer.style.display = 'none';
+    }
+
+        
+        // Mostrar os detalhes ampliados
+        detalhesContainer.style.display = 'flex';
+
+        imagemAmpliada.scr = imagem;
+        detalhesAmpliados.innerHTML = `
+        <h2>${nome}</h2>
+        <p>Posição: ${posicao}</p>
+        <p>Nascimento: ${nascimento}</p>
+        <p>Descrição: ${descricao}</p>
+        `;
+
+        detalhesContainer.appendChild(imagemAmpliada);
+        detalhesContainer.appendChild(detalhesAmpliados);
+        document.body.appendChild(detalhesContainer);
+
+
+    });
+        
+        card.appendChild(imgContainer);
+        imgContainer.appendChild(imagem);
+        card.appendChild(posicao);
+        card.appendChild(nome);
+        card.appendChild(descricao);
+        card.appendChild(nascimento);
+        card.appendChild(detalhesButton);
          
          return card;
         }
